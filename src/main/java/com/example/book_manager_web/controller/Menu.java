@@ -1,6 +1,8 @@
 package com.example.book_manager_web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,12 +25,15 @@ public class Menu {
     }
     
     @GetMapping("/register-form")
-    public String showRegisterForm(@ModelAttribute BookForm form) {
+    public String showRegisterForm(@ModelAttribute BookForm form, Model model) {
         return "/register-form";
     }
 
     @PostMapping("/register-form")
-    public String registerBook(@Validated BookForm form) {
+    public String registerBook(@Validated BookForm form, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return showRegisterForm(form, model);
+        }
         bookService.Register(form.toEntity());
 
         return "redirect:/registered";
