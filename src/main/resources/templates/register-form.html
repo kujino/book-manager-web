@@ -11,8 +11,14 @@
 
     <form th:action="@{/register-form}" th:object="${bookForm}" method="POST">
       <label for="title">書籍タイトル</label><br>
+      <div th:if="${#fields.hasErrors('title')}">
+        <span th:errors="*{title}"></span><br>
+      </div>
       <input type="text" th:field="*{title}"><br>
       <label for="purchaseDate">購入日</label><br>
+      <div th:if="${#fields.hasErrors('purchaseDate')}">
+        <span th:errors="*{purchaseDate}"></span><br>
+      </div>
       <input type="date" th:field="*{purchaseDate}"><br>
       <button type="submit">登録する</button>
     </form>
