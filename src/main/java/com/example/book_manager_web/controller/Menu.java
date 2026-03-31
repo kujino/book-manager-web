@@ -36,12 +36,13 @@ public class Menu {
         }
         bookService.Register(form.toEntity());
 
-        return "redirect:/registered";
+        return "redirect:/books";
     }
 
-    @GetMapping("/registered")
-    public String registered() {
-        return "/registered";
-
+    @GetMapping("/books")
+    public String showBooks(Model model) {
+        model.addAttribute("books", bookService.selectBooks());
+        
+        return "/books";
     }
 }

@@ -4,15 +4,57 @@
     <title>Bok Manager Web</title>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
     <link rel="stylesheet" href="/css/output.css" th:href="@{/css/output.css}">
+    <style>
+      .menu-actions {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 32px;
+      }
+
+      .menu-link {
+        display: inline-block;
+        border-radius: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        color: #fff;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      }
+
+      .menu-link-register {
+        background: #4b5563;
+      }
+
+      .menu-link-register:hover {
+        background: #6b7280;
+      }
+
+      .menu-link-books {
+        background: #64748b;
+      }
+
+      .menu-link-books:hover {
+        background: #475569;
+      }
+    </style>
   </head>
   <body>
     <h1 class="text-center font-bold text-5xl mt-8">Book Manager Web</h1>
-    <p class="text-center text-lg text-gray-500 mt-4">This is a book management application</p>
-    <a
-      th:href="@{/register-form}"
-      class="block w-fit mx-auto mt-8 rounded-lg bg-gray-600 px-6 py-3 text-center text-white font-semibold shadow-sm hover:bg-gray-500"
-    >
-      はじめる
-    </a>
+    <p class="text-center text-lg text-slate-500 mt-4">This is a book management application</p>
+    <div class="menu-actions">
+      <a
+        th:href="@{/register-form}"
+        class="menu-link menu-link-register"
+      >
+        書 籍 登 録
+      </a>
+      <a
+        th:href="@{/books}"
+        class="menu-link menu-link-books"
+      >
+        書 籍 一 覧
+      </a>
+    </div>
+    
   </body>
 </html>
