@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>登録確認</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+    <h1>書籍登録確認</h1>
+
+    <div th:object="${bookForm}">
+      <p>タイトル</p>
+      <p th:text="*{title}"></p>
+      <p>購入日</p>
+      <p th:text="*{purchaseDate}"></p>
+    </div>
+
+    <form th:action="@{/confirm-register}" method="POST" th:object="${bookForm}">
+      <input type="hidden" th:field="*{title}">
+      <input type="hidden" th:field="*{purchaseDate}">
+      <button type="submit">登録する</button>
+    </form>
+
+
+
+  </body>
+
+</html>
