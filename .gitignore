@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### css
+src/main/resources/static/css/output.css
+### codex
+.codex/

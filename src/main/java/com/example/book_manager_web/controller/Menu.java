@@ -29,20 +29,31 @@ public class Menu {
         return "/register-form";
     }
 
-    @PostMapping("/register-form")
+        @PostMapping("/register-form")
     public String registerBook(@Validated BookForm form, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return showRegisterForm(form, model);
         }
-        bookService.Register(form.toEntity());
+        model.addAttribute("bookForm", form);
 
-        return "redirect:/books";
+        return "confirm-register";
     }
 
-    @GetMapping("/books")
+    @PostMapping("/confirm-register")
+    public String confirmRegisterBook(@Validated BookForm form, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return showRegisterForm(form, model);
+        }
+        
+        bookService.Register(form.toEntity());
+        
+        return "redirect:/booklists";
+    }
+
+    @GetMapping("/booklists")
     public String showBooks(Model model) {
         model.addAttribute("books", bookService.selectBooks());
         
-        return "/books";
+        return "/booklists";
     }
 }
