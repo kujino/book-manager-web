@@ -15,15 +15,10 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class Menu {
+public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping("/")
-    public String TopMenu() {
-        return "top-menu";
-    }
-    
     @GetMapping("/register-form")
     public String showRegisterForm(@ModelAttribute BookForm form, Model model) {
         return "/register-form";
@@ -61,4 +56,5 @@ public class Menu {
         
         return "/booklists";
     }
+
 }
