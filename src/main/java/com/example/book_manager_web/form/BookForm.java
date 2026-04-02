@@ -27,4 +27,8 @@ public record BookForm (
 
         return entity;
     }
+
+    public static BookForm fromEntity(BookEntity entity) {
+        return new BookForm(entity.getTitle(), entity.getPurchaseDate());
+    }
 }

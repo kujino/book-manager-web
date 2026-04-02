@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.book_manager_web.entity.BookEntity;
 
@@ -24,4 +26,17 @@ public interface BookRepository {
             """)
 
     List<BookEntity> findAll();
+
+    @Select("SELECT title, purchase_date AS purchaseDate FROM books WHERE id = #{bookId}")
+        BookEntity selectById(@Param("bookId") int bookId);
+
+    @Update("""
+            UPDATE books
+            SET
+                title = #{book.title},
+                purchase_date = #{book.purchaseDate}
+            WHERE
+                id = #{book.id}
+            """)
+    void update(@Param("book") BookEntity entity);
 }
