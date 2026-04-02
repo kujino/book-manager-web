@@ -4,26 +4,60 @@
   <head>
     <title>登録確認</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/output.css" th:href="@{/css/output.css}">
   </head>
 
-  <body>
-    <h1>書籍登録確認</h1>
+  <body class="min-h-screen bg-slate-100 px-4 py-10 text-slate-800">
+    <div class="mx-auto max-w-3xl">
+      <div class="mb-8">
+        <p class="text-sm font-semibold tracking-[0.3em] text-slate-500">BOOK MANAGER WEB</p>
+        <h1 class="mt-2 text-3xl font-bold text-slate-900">書籍登録確認</h1>
+        <p class="mt-2 text-sm text-slate-500">入力内容を確認して問題なければ登録を完了してください。</p>
+      </div>
 
-    <div th:object="${bookForm}">
-      <p>タイトル</p>
-      <p th:text="*{title}"></p>
-      <p>購入日</p>
-      <p th:text="*{purchaseDate}"></p>
+      <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg shadow-slate-200/70">
+        <div class="border-b border-slate-200 bg-slate-50 px-6 py-4">
+          <h2 class="text-lg font-semibold text-slate-800">確認内容</h2>
+        </div>
+
+        <div th:object="${bookForm}" class="px-6 py-8 sm:px-8">
+          <dl class="divide-y divide-slate-200 rounded-xl border border-slate-200 bg-slate-50">
+            <div class="grid gap-2 px-5 py-4 sm:grid-cols-[160px_minmax(0,1fr)] sm:items-center">
+              <dt class="text-sm font-semibold text-slate-500">書籍タイトル</dt>
+              <dd class="text-base font-semibold text-slate-900 break-words" th:text="*{title}"></dd>
+            </div>
+            <div class="grid gap-2 px-5 py-4 sm:grid-cols-[160px_minmax(0,1fr)] sm:items-center">
+              <dt class="text-sm font-semibold text-slate-500">購入日</dt>
+              <dd class="text-base font-medium text-slate-800" th:text="*{purchaseDate}"></dd>
+            </div>
+          </dl>
+
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <form th:action="@{/return-register-form}" method="POST" th:object="${bookForm}">
+              <input type="hidden" th:field="*{title}">
+              <input type="hidden" th:field="*{purchaseDate}">
+              <button
+                type="submit"
+                class="inline-flex items-center justify-center rounded-lg border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
+              >
+                入力画面へ戻る
+              </button>
+            </form>
+
+            <form th:action="@{/confirm-register}" method="POST" th:object="${bookForm}">
+              <input type="hidden" th:field="*{title}">
+              <input type="hidden" th:field="*{purchaseDate}">
+              <button
+                type="submit"
+                class="inline-flex items-center justify-center rounded-lg bg-slate-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-600"
+              >
+                登録する
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <form th:action="@{/confirm-register}" method="POST" th:object="${bookForm}">
-      <input type="hidden" th:field="*{title}">
-      <input type="hidden" th:field="*{purchaseDate}">
-      <button type="submit">登録する</button>
-    </form>
-
-
-
   </body>
 
 </html>

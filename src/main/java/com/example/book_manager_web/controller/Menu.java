@@ -50,6 +50,11 @@ public class Menu {
         return "redirect:/booklists";
     }
 
+    @PostMapping("/return-register-form")
+    public String showRegisterFormRet(@ModelAttribute BookForm form) {
+        return "/register-form";
+    }
+
     @GetMapping("/booklists")
     public String showBooks(Model model) {
         model.addAttribute("books", bookService.selectBooks());
