@@ -11,8 +11,8 @@
     <div class="mx-auto max-w-3xl">
       <div class="mb-8">
         <p class="text-sm font-semibold tracking-[0.3em] text-slate-500">BOOK MANAGER WEB</p>
-        <h1 class="mt-2 text-3xl font-bold text-slate-900">書籍登録確認</h1>
-        <p class="mt-2 text-sm text-slate-500">入力内容を確認して問題なければ登録を完了してください。</p>
+        <h1 class="mt-2 text-3xl font-bold text-slate-900" th:text="${mode == 'EDIT'} ? '書籍更新確認' : '書籍登録確認'">書籍登録確認</h1>
+        <p class="mt-2 text-sm text-slate-500" th:text="${mode == 'EDIT'} ? '更新内容を確認して問題なければ反映してください。' : '入力内容を確認して問題なければ登録を完了してください。'">入力内容を確認して問題なければ登録を完了してください。</p>
       </div>
 
       <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg shadow-slate-200/70">
@@ -33,7 +33,7 @@
           </dl>
 
           <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <form th:action="@{/return-register-form}" method="POST" th:object="${bookForm}">
+            <form th:action="${mode == 'EDIT'} ? @{/return-edit-form/{id}(id=${bookId})} : @{/return-register-form}" method="POST" th:object="${bookForm}">
               <input type="hidden" th:field="*{title}">
               <input type="hidden" th:field="*{purchaseDate}">
               <button
@@ -44,12 +44,13 @@
               </button>
             </form>
 
-            <form th:action="@{/confirm-register}" method="POST" th:object="${bookForm}">
+            <form th:action="${mode == 'EDIT'} ? @{/update/{id}(id=${bookId})} : @{/confirm-register}" method="POST" th:object="${bookForm}">
               <input type="hidden" th:field="*{title}">
               <input type="hidden" th:field="*{purchaseDate}">
               <button
                 type="submit"
                 class="inline-flex items-center justify-center rounded-lg bg-slate-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-600"
+                th:text="${mode == 'EDIT'} ? '更新する' : '登録する'"
               >
                 登録する
               </button>

@@ -11,8 +11,8 @@
     <div class="mx-auto max-w-3xl">
       <div class="mb-8">
         <p class="text-sm font-semibold tracking-[0.3em] text-slate-500">BOOK MANAGER WEB</p>
-        <h1 class="mt-2 text-3xl font-bold text-slate-900">書籍登録</h1>
-        <p class="mt-2 text-sm text-slate-500">タイトルと購入日を入力して、登録内容を確認します。</p>
+        <h1 class="mt-2 text-3xl font-bold text-slate-900" th:text="${mode == 'EDIT'} ? '書籍編集' : '書籍登録'">書籍登録</h1>
+        <p class="mt-2 text-sm text-slate-500" th:text="${mode == 'EDIT'} ? 'タイトルと購入日を修正して、更新内容を確認します。' : 'タイトルと購入日を入力して、登録内容を確認します。'">タイトルと購入日を入力して、登録内容を確認します。</p>
       </div>
 
       <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg shadow-slate-200/70">
@@ -20,7 +20,7 @@
           <h2 class="text-lg font-semibold text-slate-800">入力フォーム</h2>
         </div>
 
-        <form th:action="@{/register-form}" th:object="${bookForm}" method="POST" class="space-y-6 px-6 py-8 sm:px-8">
+        <form th:action="${mode == 'EDIT'} ? @{/confirm-update/{id}(id=${bookId})} : @{/register-form}" th:object="${bookForm}" method="POST" class="space-y-6 px-6 py-8 sm:px-8">
           <div class="space-y-2">
             <label for="title" class="block text-sm font-semibold text-slate-700">書籍タイトル</label>
             <input
@@ -46,14 +46,15 @@
 
           <div class="flex flex-col gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
             <a
-              th:href="@{/}"
+              th:href="@{/booklists}"
               class="inline-flex items-center justify-center rounded-lg border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
             >
-              メニューへ戻る
+              書籍一覧へ
             </a>
             <button
               type="submit"
               class="inline-flex items-center justify-center rounded-lg bg-slate-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-600"
+              th:text="${mode == 'EDIT'} ? '更新内容を確認' : '入力内容を確認'"
             >
               入力内容を確認
             </button>

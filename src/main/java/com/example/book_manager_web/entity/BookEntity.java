@@ -11,5 +11,5 @@ public class BookEntity {
     private int id;
     private String title;
     private LocalDate purchaseDate;
-    private LocalDateTime createdAt; 
+    private LocalDateTime createdAt;
 }
